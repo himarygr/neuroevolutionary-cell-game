@@ -1,0 +1,18 @@
+SELECT  
+DISTINCT(e.app_sequence), 
+argMin(e.sale_channel_id_new.Name, date_status) as first_sale_channel, 
+argMax(original_branch_unit_id.Code, date_status) as branch_code, 
+argMax(c.direction, date_status) as direction,
+argMax(c.tr, date_status) as tr,
+argMax(c.ud, date_status) as ud,
+argMax(e.credit_amount, date_status) as credit_amount,
+argMax(cp_appr_credit_amount, date_status) as cp_appr_credit_amount, 
+argMax(cp_issd_credit_amount, date_status) as cp_issd_credit_amount,
+argMax(e.credit_target_id.Direction, date_status) as credit_target_direction,
+argMax(e.credit_target_id.Name, date_status) as credit_target_name,
+date_status as date_status, 
+argMax(e.creation_date, date_status)  as creation_date
+FROM rkk_db.credit_new e
+JOIN rkk_db.contact c ON c.code = branch_code
+GROUP BY app_sequence, date_status
+SETTINGS distributed_product_mode='global'
