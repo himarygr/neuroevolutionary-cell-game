@@ -16,3 +16,6 @@ FROM rkk_db.credit_new e
 JOIN rkk_db.contact c ON c.code = branch_code
 GROUP BY app_sequence, date_status
 SETTINGS distributed_product_mode='global'
+
+SQL Error [10] [07000]: Code: 10. DB::Exception: Not found column argMax(original_branch_unit_id.Code, date_status) in block. There are only columns: creation_date, credit_amount, cp_appr_credit_amount, cp_issd_credit_amount, app_sequence, credit_target_id.Name, credit_target_id.Direction, date_status, sale_channel_id_new.Name, original_branch_unit_id.Code. (NOT_FOUND_COLUMN_IN_BLOCK) (version 23.1.2.9 (official build))
+, server ClickHouseNode [uri=http://ssm-p02dbl-ch:8123/default]@843683424
